@@ -12,15 +12,15 @@ const ReadText = (imgfile, oem, psm) => {
                 //   logger: m => console.log(m)
             });
             worker.load().then(() => {
-                worker.loadLanguage('eng+osd').then(() => {
-                    worker.initialize('eng+osd').then(() => {
+                worker.loadLanguage('digits+digits1').then(() => {
+                    worker.initialize('digits+digits1').then(() => {
                         worker.setParameters({
                             tessedit_ocr_engine_mode: oem_var,
                             tessedit_pageseg_mode: psm_var,
-                            // tessedit_char_whitelist: '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+                            tessedit_char_whitelist: '0123456789'
                         }).then(() => {
                             worker.recognize(imgfile, {
-                                // tessedit_char_whitelist: '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+                                tessedit_char_whitelist: '0123456789'
                             }).then(({ data: { text } }) => {
                                 // console.log(text)
                                 resolve(text)
